@@ -1,0 +1,6 @@
+/* pages/list/list.wxss */
+
+.list-item {
+    padding: 30rpx;
+    border-bottom: 1rpx dashed #ddd;
+}

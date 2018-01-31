@@ -1,0 +1,16 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/create-list/create-list",
+    "pages/search/search",
+    "pages/form/form",
+    "pages/book/book",
+    "pages/list/list"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#0068c4",
+    "navigationBarTitleText": "小小书单",
+    "navigationBarTextStyle":"light"
+  }
+}

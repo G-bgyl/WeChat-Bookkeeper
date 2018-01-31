@@ -1,0 +1,22 @@
+<view class="weui-cells__title">书单名称</view>
+<view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__bd">
+            <input class="weui-input" bindinput="onTitleInput" value="{{title}}" />
+        </view>
+    </view>
+</view>
+
+<view class="weui-cells__title">书单简介</view>
+<view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+        <view class="weui-cell__bd">
+            <textarea class="weui-textarea" bindinput="onDescriptionInput" value="{{description}}" maxlength="200" style="height: 5em" />
+            <view class="weui-textarea-counter">{{description.length}}/200</view>
+        </view>
+    </view>
+</view>
+
+<view class="weui-btn-area">
+    <button loading="{{doing}}" class="weui-btn" type="primary" bindtap="addList">{{id ? '保存' : '添加'}}书单</button>
+</view>

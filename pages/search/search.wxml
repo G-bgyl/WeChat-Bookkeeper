@@ -1,0 +1,41 @@
+<!--pages/search/search.wxml-->
+<view class="weui-search-bar">
+    <view class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+            <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="search" />
+            <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                <icon type="clear" size="14"></icon>
+            </view>
+        </view>
+        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+            <icon class="weui-icon-search" type="search" size="14"></icon>
+            <view class="weui-search-bar__text">搜索书名或ISBN</view>
+        </label>
+    </view>
+    <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+</view>
+
+<view wx:for="{{list}}" wx:key="id" bindtap="gotoBookDetail" data-item="{{item}}" class="list-item" style="overflow: hidden;">
+    <image src="{{item.image}}" mode="widthFix" style="width: 170rpx; float: left;" />
+    <view style="margin-left: 200rpx;">
+        <view>{{item.title}}</view>
+        <view style="color: #aaa; font-size: 30rpx;">豆瓣评分：{{item.rating.average}}（{{item.rating.numRaters}}）</view>
+        <view style="font-size: 30rpx;">作者：<text wx:key="*this" wx:for="{{item.author}}">{{item}}</text></view>
+        <view style="font-size: 30rpx;" wx:if="{{item.translator.length}}">译者：<text wx:key="*this" wx:for="{{item.translator}}">{{item}}</text></view>
+        <view style="font-size: 30rpx; margin-bottom: 10rpx;">ISBN：{{item.isbn13}}</view>
+        <button style="margin-right: 10rpx;" size="mini" wx:if="{{!bookMap[item.id]}}" catchtap="addBook" data-state="want" data-item="{{item}}">想读</button>
+        <button style="margin-right: 10rpx;" size="mini" wx:if="{{!bookMap[item.id]}}" catchtap="addBook" data-state="reading" data-item="{{item}}">在读</button>
+        <button size="mini" wx:if="{{!bookMap[item.id]}}" catchtap="addBook" data-state="readed" data-item="{{item}}">读过</button>
+        <button disabled="{{true}}" size="mini" wx:if="{{bookMap[item.id]}}">已添加</button>
+    </view>
+</view>
+
+<view class="weui-loadmore" wx:if="{{pagination.loading}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在搜索</view>
+</view>
+
+<view class="weui-loadmore weui-loadmore_line weui-loadmore_dot" wx:if="{{!pagination.loading && pagination.nomore}}">
+    <view class="weui-loadmore__tips weui-loadmore__tips_in-line weui-loadmore__tips_in-dot"></view>
+</view>

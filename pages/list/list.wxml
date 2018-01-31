@@ -1,0 +1,36 @@
+<!--pages/list/list.wxml-->
+<view class="weui-search-bar">
+    <view class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+            <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindinput="inputTyping" bindconfirm="search" />
+            <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                <icon type="clear" size="14"></icon>
+            </view>
+        </view>
+        <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+            <icon class="weui-icon-search" type="search" size="14"></icon>
+            <view class="weui-search-bar__text">搜索书单内的书籍</view>
+        </label>
+    </view>
+    <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+</view>
+
+<view style="border:1rpx solid #ddd; margin: 20rpx; font-size: 30rpx; background-color: #eee; color: #aaa; border-radius: 10rpx; padding: 20rpx;"><navigator url="/pages/create-list/create-list?id={{detail.id}}" open-type="navigate" style="color: #0068c4; float: right;">编辑</navigator>简介：{{detail.description || '无'}}</view>
+
+<view wx:for="{{list}}" wx:key="id" bindtap="gotoBookDetail" data-item="{{item}}" class="list-item" style="overflow: hidden;">
+    <image src="{{item.image}}" mode="widthFix" style="width: 170rpx; float: left;" />
+    <view style="margin-left: 200rpx;">
+        <view>{{item.title}}</view>
+        <view style="color: #aaa; font-size: 30rpx;">豆瓣评分：{{item.rating.average}}（{{item.rating.numRaters}}）</view>
+        <view style="font-size: 30rpx;">作者：<text wx:key="*this" wx:for="{{item.author}}">{{item}}</text></view>
+        <view style="font-size: 30rpx;" wx:if="{{item.translator.length}}">译者：<text wx:key="*this" wx:for="{{item.translator}}">{{item}}</text></view>
+        <view style="font-size: 30rpx; margin-bottom: 10rpx;">ISBN：{{item.isbn13}}</view>
+        <button style="margin-right: 10rpx;" size="mini" type="{{item.state == 'want' ? 'primary' : 'default'}}" catchtap="switchState" data-state="want" data-item="{{item}}">想读</button>
+        <button style="margin-right: 10rpx;" size="mini" type="{{item.state == 'reading' ? 'primary' : 'default'}}" catchtap="switchState" data-state="reading" data-item="{{item}}">在读</button>
+        <button size="mini" type="{{item.state == 'readed' ? 'primary' : 'default'}}" catchtap="switchState" data-state="readed" data-item="{{item}}">读过</button>
+    </view>
+</view>
+
+<view class="ftb" bindtap="showActionSheet">+</view>
+<view class="no-item" style="height: 300rpx;" wx:if="{{!list.length}}">暂无书籍</view>

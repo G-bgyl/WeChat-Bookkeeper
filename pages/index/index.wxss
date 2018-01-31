@@ -1,0 +1,11 @@
+/**index.wxss**/
+.list-item {
+  padding: 30rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.list-item icon {
+    float: right;
+    margin-left: 10rpx;
+    margin-top: 10rpx;
+}

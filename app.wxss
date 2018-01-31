@@ -1,0 +1,51 @@
+/**app.wxss**/
+@import './weui.wxss';
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}
+
+.ftb {
+  position: fixed;
+  bottom: 50rpx;
+  right: 50rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  font-size: 70rpx;
+  font-weight: bolder;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0068c4;
+  color: white;
+}
+
+.bg-mask {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,.3);
+}
+
+.bg-mask.show {
+  display: block;
+}
+
+.no-item {
+  color: #aaa;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx;
+}
